@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <div class="app-logo">
+        <img class="app-logo__image" src="/assets/images/github_logo.png">
+        <div class="app-logo__title">GitRepo</div>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-container">
+    <div class="page-title">Search repositories</div>
+
+    <ion-searchbar debounce="500" [value]="searchTerm" (ionChange)="onSearchTermChange($event.target.value)" #searchbar></ion-searchbar>
+
+    <div class="query-result" *ngIf="searchTerm && queryResult && queryResult.resultCount > 0">
+      <ion-grid class="pagination ion-margin-top">
+        <ion-row class="ion-align-items-center">
+          <ion-col class="pagination__stats" size="12" size-md="6">
+            Showing {{queryResult.getRangeStart() | number}} - {{queryResult.getRangeEnd() | number}} of {{queryResult.totalCount | number}} results
+          </ion-col>
+          <ion-col class="pagination__buttons ion-text-left ion-text-md-right" size="12" size-md="6">
+            <ion-button (click)="onPrevPage()" *ngIf="queryResult.hasPrevPage()">Previous</ion-button>
+            <ion-button (click)="onNextPage()" *ngIf="queryResult.hasNextPage()">Next</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <table class="data-table ion-margin-top">
+        <tr>
+          <th>Repository Name</th>
+          <th>Owner</th>
+          <th>Stars</th>
+          <th>Link</th>
+          <th>Detail</th>
+        </tr>
+        <tr *ngFor="let repository of queryResult.repositories">
+          <td class="data-table__repo-name ion-text-center">
+            {{repository.name}}
+          </td>
+          <td class="data-table__owner-name ion-text-center">
+            {{repository.owner.name}}
+          </td>
+          <td class="data-table__star-count ion-text-right">
+            {{repository.starCount | number}}
+          </td>
+          <td class="data-table__repo-url ion-text-center">
+            <a [href]="repository.detailUrl" target="_blank">{{repository.fullName}}</a>
+          </td>
+          <td class="data-table__detail ion-text-center">
+            <a (click)="onRepositoryDetails(repository)">Detail</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="empty-state" *ngIf="!searchTerm && !errored">
+      <div class="empty-state__message">Enter a search term to begin</div>
+      <div class="empty-state__image">
+        <img src="/assets/images/empty_state_no_term.png">
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="searchTerm && queryResult && queryResult.resultCount === 0">
+      <div class="empty-state__message">Hmm...no result found</div>
+      <div class="empty-state__image">
+        <img src="/assets/images/empty_state_no_result.png">
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="errored">
+      <div class="empty-state__message">Hmm...something went wrong</div>
+      <div class="empty-state__image">
+        <img src="/assets/images/empty_state_error.png">
+      </div>
+    </div>
+  </div>
+</ion-content>

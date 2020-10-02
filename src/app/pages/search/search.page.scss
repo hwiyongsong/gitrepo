@@ -1,0 +1,40 @@
+:host {
+  .data-table {
+    width: 100%;
+    border: 1px var(--ion-color-medium) solid;
+    border-collapse: collapse;
+
+    th, td {
+      padding: var(--spacing-base);
+      border: 1px var(--ion-color-medium) solid;
+    }
+
+    th {
+      font-weight: var(--text-weight-bold);
+      font-size: var(--text-size-small);
+      color: var(--ion-color-medium);
+      text-transform: uppercase;
+    }
+  }
+
+  .data-table__repo-name {
+    width: 20%;
+    font-weight: var(--text-weight-bold);
+  }
+
+  .data-table__owner-name {
+    width: 20%;
+  }
+
+  .data-table__star-count {
+    width: 15%;
+  }
+
+  .data-table__repo-url {
+    width: 30%;
+  }
+
+  .data-table__detail {
+    width: 15%;
+  }
+}

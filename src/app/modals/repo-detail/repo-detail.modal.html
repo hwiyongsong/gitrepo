@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClose()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Repository detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="loaded">
+    <div class="page-title">{{repository.fullName}}</div>
+
+    <section class="commits">
+      <header>Last 3 commits</header>
+
+      <ul>
+        <li *ngFor="let commit of lastCommits">SHA {{commit.sha}} by {{commit.authorName}}</li>
+      </ul>
+    </section>
+
+    <section class="forks">
+      <header>Last fork</header>
+
+      <ul>
+        <li *ngFor="let fork of lastForks">Forked to {{fork.fullName}} by {{fork.owner.name}}</li>
+      </ul>
+    </section>
+
+    <section class="user-detail">
+      <header>Owner biography</header>
+      <div class="user-detail__bio" *ngIf="ownerDetail.bio">{{ownerDetail.bio}}</div>
+      <div class="user-detail__bio" *ngIf="!ownerDetail.bio">No biography found</div>
+    </section>
+  </div>
+
+  <div class="empty-state" *ngIf="errored">
+    <div class="empty-state__message">Hmm...something went wrong</div>
+    <div class="empty-state__image">
+      <img src="/assets/images/empty_state_error.png">
+    </div>
+  </div>
+</ion-content>
