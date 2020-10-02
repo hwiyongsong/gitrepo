@@ -2,9 +2,9 @@
 
 A basic app to search Github repositories and view repository detail. 
 
-This app is built using [Ionic/Angular framework](https://ionicframework.com/docs/angular/overview).
-
-This does NOT use a Github auth token, so it is limited to the default "60 queries per hour" to Github API services.
+* This app is built using [Ionic/Angular framework](https://ionicframework.com/docs/angular/overview).
+* This does NOT use a Github auth token, so it is limited to the default "60 queries per hour" to Github API services.
+* Search queries are run automatically as you type into the searchbox with debounce of 500ms.
 
 ### Live URL ###
 * [https://gitrepo-search.web.app](https://gitrepo-search.web.app)
