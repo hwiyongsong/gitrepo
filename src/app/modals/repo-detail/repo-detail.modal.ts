@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { GithubService } from "@app/services/github.service";
 import { Commit } from "@app/entities/commit";
 import { Fork } from "@app/entities/fork";
 import { Repository } from "@app/entities/repository";
 import { User } from "@app/entities/user";
+import { GithubService } from "@app/services/github.service";
 import { LoadingController, ModalController } from "@ionic/angular";
 import { forkJoin } from "rxjs";
 
@@ -36,7 +36,7 @@ export class RepoDetailModal implements OnInit {
     });
 
     loading.present().then(() => {
-      // Fetch the data as all-or-nothing, so we don't show incomplete data to the user.
+      // Fetch data in all-or-nothing, so we don't show incomplete data to the user.
       const sequence = forkJoin([
         this.githubService.queryLastCommits(this.repository, RepoDetailModal.COMMIT_FETCH_LIMIT),
         this.githubService.queryLastForks(this.repository, RepoDetailModal.FORK_FETCH_LIMIT),

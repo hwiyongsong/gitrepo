@@ -50,7 +50,7 @@ export class SearchPage implements OnInit {
 
   onPrevPage() {
     // If this is the first page, there is no previous page, so ignore this call.
-    if (this.page === 1) {
+    if (this.page <= 1) {
       return;
     }
 
@@ -102,6 +102,10 @@ export class SearchPage implements OnInit {
     });
   }
 
+  /*
+   * Updates the browser URL with new search term and page number.
+   * Note that this does NOT cause a browser redirect, and simply updates the URL.
+   */
   private updateRequestParams(searchTerm: string, page: number) {
     const requestParams = {};
     requestParams[SearchPage.SEARCH_TERM_REQUEST_PARAM] = searchTerm;
